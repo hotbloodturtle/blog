@@ -1,1 +1,35 @@
 @import "tailwindcss";
+
+@layer base {
+  h1 {
+    font-size: var(--text-4xl);
+  }
+  h2 {
+    font-size: var(--text-2xl);
+    margin-top: 36px;
+    margin-bottom: 12px;
+    font-weight: 600;
+  }
+  h3 {
+    font-size: var(--text-xl);
+    font-weight: 500;
+    margin-top: 24px;
+    margin-bottom: 8px;
+  }
+  p {
+    letter-spacing: -0.003em;
+    line-height: 32px;
+    margin-bottom: 16px;
+    font-size: 20px;
+  }
+  ul {
+    margin-bottom: 24px;
+    font-size: 20px;
+  }
+  li {
+    list-style: circle;
+    margin-left: 24px;
+    margin-top: 12px;
+    font-size: 20px;
+  }
+}
