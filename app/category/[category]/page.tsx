@@ -1,8 +1,8 @@
-import { notFound } from 'next/navigation';
-import Link from 'next/link';
-import { getAllCategories, getPostsByCategory } from '../../lib/markdown';
-import BlogCard from '../../components/BlogCard';
-import type { Metadata } from 'next';
+import type { Metadata } from "next";
+import Link from "next/link";
+import { notFound } from "next/navigation";
+import BlogCard from "../../components/BlogCard";
+import { getAllCategories, getPostsByCategory } from "../../lib/markdown";
 
 interface CategoryPageProps {
   params: Promise<{
@@ -17,14 +17,17 @@ export async function generateStaticParams() {
   }));
 }
 
-export async function generateMetadata({ params }: CategoryPageProps): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: CategoryPageProps): Promise<Metadata> {
   const { category } = await params;
   const decodedCategory = decodeURIComponent(category);
+  console.log(decodedCategory, "decodedCategory");
   const posts = getPostsByCategory(decodedCategory);
 
   if (posts.length === 0) {
     return {
-      title: '카테고리를 찾을 수 없습니다',
+      title: "카테고리를 찾을 수 없습니다",
     };
   }
 
@@ -89,10 +92,12 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
 
       {/* Related Categories */}
       <section className="border-t border-gray-200 pt-8">
-        <h2 className="text-xl font-bold text-gray-900 mb-6">다른 카테고리 둘러보기</h2>
+        <h2 className="text-xl font-bold text-gray-900 mb-6">
+          다른 카테고리 둘러보기
+        </h2>
         <div className="flex flex-wrap gap-3">
           {allCategories
-            .filter(category => category.name !== decodedCategory)
+            .filter((category) => category.name !== decodedCategory)
             .map((category) => (
               <Link
                 key={category.name}
@@ -100,7 +105,9 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
                 className="inline-flex items-center px-4 py-2 bg-green-100 hover:bg-green-200 text-green-700 rounded-full transition-colors"
               >
                 <span className="font-medium">{category.name}</span>
-                <span className="ml-2 text-sm text-green-600">({category.count})</span>
+                <span className="ml-2 text-sm text-green-600">
+                  ({category.count})
+                </span>
               </Link>
             ))}
         </div>
